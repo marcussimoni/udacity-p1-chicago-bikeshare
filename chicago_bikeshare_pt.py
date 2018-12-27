@@ -63,7 +63,7 @@ def column_to_list(lista, index):
         lista: lista com os dados que serão processados
         index: index da coluna
     Returns:
-        Uma nova lista com todos os valores de uma determinada columna    
+        Uma nova lista com todos os valores de uma determinada coluna    
     """
 
     column_list = []
