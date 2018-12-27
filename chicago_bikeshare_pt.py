@@ -26,9 +26,9 @@ print(data_list[1])
 
 input("Aperte Enter para continuar...")
 # TAREFA 1
-tarefa1 = data_list[1:21]
-for l in tarefa1:
-    print(l)
+total_de_linhas = data_list[1:21]
+for linha in total_de_linhas:
+    print(linha)
     
 print("\n\nTAREFA 1: Imprimindo as primeiras 20 amostras")
 
@@ -42,9 +42,9 @@ input("Aperte Enter para continuar...")
 # TAREFA 2
 # Imprima o `gênero` das primeiras 20 linhas
 
-tarefa2 = data_list[0:20]
-for index,t in enumerate(tarefa2):
-    print((index + 1), t[6])
+generos = data_list[0:20]
+for index,genero in enumerate(generos):
+    print((index + 1), genero[6])
 
 print("\nTAREFA 2: Imprimindo o gênero das primeiras 20 amostras")
 
@@ -56,12 +56,21 @@ input("Aperte Enter para continuar...")
 # TAREFA 3
 # TODO: Crie uma função para adicionar as colunas(features) de uma lista em outra lista, 
 # na mesma ordem
-def column_to_list(data, index):
+def column_to_list(lista, index):
+    """
+    Função que extrai todos os valores de uma coluna.
+    Args:
+        lista: lista com os dados que serão processados
+        index: index da coluna
+    Returns:
+        Uma nova lista com todos os valores de uma determinada columna    
+    """
+
     column_list = []
     # Dica: Você pode usar um for para iterar sobre as amostras, 
     # pegar a feature pelo seu índice, e dar append para uma lista
-    for d in data:
-        column_list.append(d[index])
+    for linha in lista:
+        column_list.append(linha[index])
 
     return column_list
 
@@ -85,8 +94,8 @@ input("Aperte Enter para continuar...")
 male = 0
 female = 0
 
-for d in data_list:
-    gender = d[-2].upper()
+for gender in data_list:
+    gender = gender[-2].upper()
     if(gender == 'MALE'):
         male += 1
     elif(gender == 'FEMALE'):
@@ -107,10 +116,13 @@ input("Aperte Enter para continuar...")
 # Isso deveria retornar uma lista com [count_male, count_female] 
 # (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
 def count_gender(data_list):
+    """
+    função que conta a quantidade de usuário agrupados pelo gênero
+    """
     male = 0
     female = 0
-    for d in data_list:
-        gender = d[-2].upper()
+    for gender in data_list:
+        gender = gender[-2].upper()
         if(gender == 'MALE'):
            male += 1
         elif(gender.upper() == 'FEMALE'):
@@ -136,7 +148,10 @@ input("Aperte Enter para continuar...")
 # e retorne este gênero como uma string.
 # Esperamos ver "Male", "Female", ou "Equal" como resposta.
 def most_popular_gender(data_list):
-    
+    """
+    função que verifica qual o gênero mais popular entre 
+    os usuário do serviço bike share
+    """
     male, female = count_gender(data_list)
     answer = ""
     
@@ -175,9 +190,16 @@ input("Aperte Enter para continuar...")
 # Tenha certeza que a legenda está correta.
 
 def count_user(list):
+    """
+    função que conta o total de usuários do serviço bike share
+    Args:
+        list: lista de usuarios
+    returns:
+        retorna o total de usuários agrupados pelo tipo de usuário
+    """
     customer, dependent, subscriber = 0,0,0
-    for u in list:
-        user = u.upper()
+    for user in list:
+        user = user.upper()
         if(user == 'CUSTOMER'): 
             customer += 1
         elif(user == 'DEPENDENT'):
@@ -242,7 +264,12 @@ total = len(float_list)
 min_trip = float_list[0]
 max_trip = float_list[-1]
 mean_trip = mean_trip / total
-median_trip = float_list[total//2]
+if(total%2==0):
+    first_value = float_list[total//2 - 1]
+    second_value = float_list[total//2]
+    median_trip = (first_value + second_value)/2
+else:
+    median_trip = float_list[total//2]
 
 print("\nTAREFA 9: Imprimindo o mínimo, máximo, média, e mediana")
 print("Min: ", min_trip, "Max: ", max_trip, "Média: ", mean_trip, "Mediana: ", median_trip)
@@ -288,11 +315,19 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar tipos de usuários, sem definir os tipos
 # para que nós possamos usar essa função com outra categoria de dados.
 print("Você vai encarar o desafio? (yes ou no)")
-answer = "no"
+answer = "yes"
 
 def count_items(column_list):
     item_types = set(column_list)
-    count_items = len(column_list)
+    count_items = []
+    for type in item_types:
+        total = 0
+        for column in column_list:
+            if(column == type):
+                total += 1
+
+        count_items.append(total)
+        
     return item_types, count_items
 
 
