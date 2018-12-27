@@ -118,6 +118,10 @@ input("Aperte Enter para continuar...")
 def count_gender(data_list):
     """
     função que conta a quantidade de usuário agrupados pelo gênero
+    Args:
+        data_list: lista de dados 
+    returns:
+        total de usuário agrupados por gênero    
     """
     male = 0
     female = 0
@@ -151,6 +155,11 @@ def most_popular_gender(data_list):
     """
     função que verifica qual o gênero mais popular entre 
     os usuário do serviço bike share
+    Args:
+        data_list: lista de dados 
+    returns:
+        gênero mais popular entre os usuário do serviço bike share
+
     """
     male, female = count_gender(data_list)
     answer = ""
@@ -327,7 +336,7 @@ def count_items(column_list):
                 total += 1
 
         count_items.append(total)
-        
+
     return item_types, count_items
 
 
